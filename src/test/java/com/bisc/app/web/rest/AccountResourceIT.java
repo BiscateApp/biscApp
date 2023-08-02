@@ -14,7 +14,6 @@ import com.bisc.app.security.AuthoritiesConstants;
 import com.bisc.app.service.UserService;
 import com.bisc.app.service.dto.AdminUserDTO;
 import com.bisc.app.service.dto.PasswordChangeDTO;
-import com.bisc.app.service.dto.UserDTO;
 import com.bisc.app.web.rest.vm.KeyAndPasswordVM;
 import com.bisc.app.web.rest.vm.ManagedUserVM;
 import java.time.Instant;

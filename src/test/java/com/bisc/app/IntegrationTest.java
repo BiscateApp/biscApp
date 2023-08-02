@@ -1,6 +1,5 @@
 package com.bisc.app;
 
-import com.bisc.app.BiscApp;
 import com.bisc.app.config.AsyncSyncConfiguration;
 import com.bisc.app.config.EmbeddedKafka;
 import com.bisc.app.config.EmbeddedSQL;
