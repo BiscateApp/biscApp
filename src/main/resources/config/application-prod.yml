@@ -33,7 +33,7 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/biscApp?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/BiscApp?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: root
     password:
     hikari:
@@ -104,7 +104,7 @@ jhipster:
         # - In the Consul configserver
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: MmJiZGVlYjM0MWM2MGQ3OWQ1YzgwNjQwMDU1NDJlNjJhMjZlZmUwMDAzYjhkOTFhNWY3YmNmMzgzZjg5MzkzMzFhNzE2OTZiMjg5ODAxZTQ3ZWUzMDFkMGZlZjRjNDNhMGE1NDk3ZmE3MjhiYTJjNjY3YTAzMmM1YWE5OWExZGI=
+        base64-secret: ZmEyZGYwZWQ0OGFjZDNmYzY1MmZmODQyODE1OTAwZDdjM2UwMjAzOGY2ZWJmOTk3YWYxMTYwZTZhZWIwYTkwNzk5ZjQwMTcyNzhiZDMyYWJhOTJkZTJkNzg3M2E1N2U4ZmJmMzZmODEzZDYzZWE2ZTMwMzBlNmJjNzY2OTY3ZjA=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

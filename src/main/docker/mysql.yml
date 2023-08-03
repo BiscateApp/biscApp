@@ -5,7 +5,7 @@ services:
     image: mysql:8.0.33
     volumes:
       - ./config/mysql:/etc/mysql/conf.d
-    #   - ~/volumes/jhipster/biscApp/mysql/:/var/lib/mysql/
+    #   - ~/volumes/jhipster/BiscApp/mysql/:/var/lib/mysql/
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=biscapp

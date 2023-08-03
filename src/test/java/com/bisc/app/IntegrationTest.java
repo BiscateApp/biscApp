@@ -1,7 +1,6 @@
 package com.bisc.app;
 
 import com.bisc.app.config.AsyncSyncConfiguration;
-import com.bisc.app.config.EmbeddedKafka;
 import com.bisc.app.config.EmbeddedSQL;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,6 +17,5 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootTest(classes = { BiscApp.class, AsyncSyncConfiguration.class })
 @EmbeddedSQL
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-@EmbeddedKafka
 public @interface IntegrationTest {
 }
