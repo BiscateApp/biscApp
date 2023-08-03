@@ -1,4 +1,4 @@
-# biscApp
+# BiscApp
 
 This application was generated using JHipster 8.0.0-beta.2, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.0.0-beta.2](https://www.jhipster.tech/documentation-archive/v8.0.0-beta.2).
 
@@ -135,7 +135,7 @@ Refer to [Doing API-First development][] for more details.
 
 ### Packaging as jar
 
-To build the final jar and optimize the biscApp application for production, run:
+To build the final jar and optimize the BiscApp application for production, run:
 
 ```
 ./mvnw -Pprod clean verify

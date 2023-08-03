@@ -5,11 +5,3 @@ services:
     extends:
       file: ./mysql.yml
       service: mysql
-  kafka:
-    extends:
-      file: ./kafka.yml
-      service: kafka
-  zookeeper:
-    extends:
-      file: ./kafka.yml
-      service: zookeeper

@@ -9,7 +9,6 @@ services:
       - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/biscapp?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
       - SPRING_LIQUIBASE_URL=jdbc:mysql://mysql:3306/biscapp?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
     ports:
       - 127.0.0.1:8081:8081
     healthcheck:
@@ -28,11 +27,3 @@ services:
     extends:
       file: ./mysql.yml
       service: mysql
-  kafka:
-    extends:
-      file: ./kafka.yml
-      service: kafka
-  zookeeper:
-    extends:
-      file: ./kafka.yml
-      service: zookeeper
