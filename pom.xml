@@ -448,7 +448,8 @@
                             </platforms>
                         </from>
                         <to>
-                            <image>biscapp:latest</image>
+                            <image>snackk/biscapp:latest</image>
+                            <image>snackk/biscapp:${project.version}</image>
                         </to>
                         <container>
                             <entrypoint>
