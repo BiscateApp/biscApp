@@ -1,0 +1,26 @@
+{
+  "applications": "*",
+  "changelogDate": "20230809200139",
+  "entityTableName": "client",
+  "fields": [
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "13",
+      "fieldValidateRulesMinlength": "9"
+    }
+  ],
+  "name": "Client",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "address",
+      "otherEntityRelationshipName": "client",
+      "relationshipName": "address",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

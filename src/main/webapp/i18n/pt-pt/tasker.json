@@ -1,0 +1,28 @@
+{
+  "biscApp": {
+    "tasker": {
+      "home": {
+        "title": "Taskers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Criar novo(a) Tasker",
+        "createOrEditLabel": "Criar ou editar Tasker",
+        "notFound": "Nenhum Taskers encontrado"
+      },
+      "created": "Um novo Tasker foi criado com o identificador {{ param }}",
+      "updated": "Tasker com identificador {{ param }} foi actualizado",
+      "deleted": "Tasker com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Tasker {{ id }}?"
+      },
+      "detail": {
+        "title": "Tasker"
+      },
+      "id": "ID",
+      "phoneNumber": "Phone Number",
+      "validation": "Validation",
+      "whenCreated": "When Created",
+      "portfolio": "Portfolio",
+      "address": "Address"
+    }
+  }
+}

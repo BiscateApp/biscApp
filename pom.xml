@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bisc.app</groupId>
     <artifactId>biscapp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>BiscApp</name>
     <description>Description for BiscApp</description>
@@ -44,11 +43,11 @@
         <jib-maven-plugin.image>eclipse-temurin:17-jre-focal</jib-maven-plugin.image>
         <jib-maven-plugin.version>3.3.2</jib-maven-plugin.version>
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
-        <liquibase-plugin.driver/>
-        <liquibase-plugin.hibernate-dialect/>
-        <liquibase-plugin.password/>
-        <liquibase-plugin.url/>
-        <liquibase-plugin.username/>
+        <liquibase-plugin.driver />
+        <liquibase-plugin.hibernate-dialect />
+        <liquibase-plugin.password />
+        <liquibase-plugin.url />
+        <liquibase-plugin.username />
         <liquibase.version>4.20.0</liquibase.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
@@ -68,11 +67,11 @@
         <modernizer-maven-plugin.version>2.6.0</modernizer-maven-plugin.version>
         <nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
         <openapi-generator-maven-plugin.version>6.6.0</openapi-generator-maven-plugin.version>
-        <profile.api-docs/>
-        <profile.e2e/>
-        <profile.no-liquibase/>
-        <profile.test/>
-        <profile.tls/>
+        <profile.api-docs />
+        <profile.e2e />
+        <profile.no-liquibase />
+        <profile.test />
+        <profile.tls />
         <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <spotless-maven-plugin.version>2.37.0</spotless-maven-plugin.version>
@@ -382,7 +381,7 @@
                     <version>${spotless-maven-plugin.version}</version>
                     <configuration>
                         <java>
-                            <removeUnusedImports/>
+                            <removeUnusedImports />
                         </java>
                     </configuration>
                     <executions>
@@ -562,7 +561,7 @@
                             <id>enforce-dependencyConvergence</id>
                             <configuration>
                                 <rules>
-                                    <DependencyConvergence/>
+                                    <DependencyConvergence />
                                 </rules>
                                 <fail>false</fail>
                             </configuration>
@@ -797,7 +796,7 @@
                         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                         <driver>${liquibase-plugin.driver}</driver>
                         <url>${liquibase-plugin.url}</url>
-                        <defaultSchemaName/>
+                        <defaultSchemaName />
                         <username>${liquibase-plugin.username}</username>
                         <password>${liquibase-plugin.password}</password>
                         <referenceUrl>hibernate:spring:com.bisc.app.domain?dialect=${liquibase-plugin.hibernate-dialect}&amp;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
@@ -891,7 +890,7 @@
                 <liquibase-plugin.driver>org.h2.Driver</liquibase-plugin.driver>
                 <liquibase-plugin.url>jdbc:h2:file:${project.build.directory}/h2db/db/biscapp</liquibase-plugin.url>
                 <liquibase-plugin.username>BiscApp</liquibase-plugin.username>
-                <liquibase-plugin.password/>
+                <liquibase-plugin.password />
             </properties>
             <dependencies>
                 <dependency>
@@ -958,7 +957,7 @@
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
-                                                <ignore/>
+                                                <ignore />
                                             </action>
                                         </pluginExecution>
                                         <pluginExecution>
@@ -972,7 +971,7 @@
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
-                                                <ignore/>
+                                                <ignore />
                                             </action>
                                         </pluginExecution>
                                         <pluginExecution>
@@ -985,7 +984,7 @@
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
-                                                <ignore/>
+                                                <ignore />
                                             </action>
                                         </pluginExecution>
                                     </pluginExecutions>
@@ -1031,7 +1030,7 @@
                 <liquibase-plugin.driver>com.mysql.cj.jdbc.Driver</liquibase-plugin.driver>
                 <liquibase-plugin.url>jdbc:mysql://localhost:3306/BiscApp</liquibase-plugin.url>
                 <liquibase-plugin.username>root</liquibase-plugin.username>
-                <liquibase-plugin.password/>
+                <liquibase-plugin.password />
             </properties>
             <build>
                 <plugins>
@@ -1204,9 +1203,9 @@
                                     <target>
                                         <condition property="skip.npm" value="true" else="false">
                                             <and>
-                                                <available file="checksums.csv" filepath="${project.build.directory}"/>
-                                                <available file="checksums.csv.old" filepath="${project.build.directory}"/>
-                                                <filesmatch file1="${project.build.directory}/checksums.csv" file2="${project.build.directory}/checksums.csv.old"/>
+                                                <available file="checksums.csv" filepath="${project.build.directory}" />
+                                                <available file="checksums.csv.old" filepath="${project.build.directory}" />
+                                                <filesmatch file1="${project.build.directory}/checksums.csv" file2="${project.build.directory}/checksums.csv.old" />
                                             </and>
                                         </condition>
                                     </target>
