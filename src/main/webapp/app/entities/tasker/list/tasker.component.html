@@ -1,0 +1,108 @@
+<div>
+  <h2 id="page-heading" data-cy="TaskerHeading">
+    <span jhiTranslate="biscApp.tasker.home.title">Taskers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="biscApp.tasker.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tasker"
+        [routerLink]="['/tasker/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="biscApp.tasker.home.createLabel"> Criar novo(a) Tasker </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="taskers?.length === 0">
+    <span jhiTranslate="biscApp.tasker.home.notFound">Nenhum Taskers encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="taskers && taskers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="phoneNumber">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.tasker.phoneNumber">Phone Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="validation">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.tasker.validation">Validation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="whenCreated">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.tasker.whenCreated">When Created</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="portfolio.id">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.tasker.portfolio">Portfolio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let tasker of taskers; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/tasker', tasker.id, 'view']">{{ tasker.id }}</a>
+          </td>
+          <td>{{ tasker.phoneNumber }}</td>
+          <td jhiTranslate="{{ 'biscApp.TaskerValidation.' + tasker.validation }}">{{ tasker.validation }}</td>
+          <td>{{ tasker.whenCreated | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="tasker.portfolio">
+              <a [routerLink]="['/portfolio', tasker.portfolio.id, 'view']">{{ tasker.portfolio.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/tasker', tasker.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/tasker', tasker.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(tasker)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+id;country;city;postal_code;street_address;vat_number;is_default
+1;Iémen;Fundão;Madeira;Nordeste;Genérico ;true
+2;Coreia do Sul;Ponte de Sor;Sudeste;Nordeste;SodoesteX;false
+3;China;Gandra;Livros;Ergonómico Sodoeste;Oeste Lus;true
+4;Arménia;Felgueiras;Este Betão;Mercearia Marca;ciano Cad;false
+5;Guame;Figueira da Foz;Nordeste Sul Suave;Granada Mesa Borracha;Sabonete ;false
+6;Marianas do Norte;Vila do Conde;Betão;Impressionante Pequeno Este;Sem Pizza;false
+7;Libéria;Vila Nova de Santo A;Norte;Sul;Este Gran;false
+8;Ilha Norfolk;Ribeira Grande;prata;Teclado Niue Congelado;Vaticano ;false
+9;Antilhas Neerlandesa;Mirandela;ciano;Pequeno Sul Plástico;Sul Romeu;true
+10;Eritreia;Reguengos de Monsara;Oeste Peixe;Ilha Salsichas Saboroso;Sapatos B;true

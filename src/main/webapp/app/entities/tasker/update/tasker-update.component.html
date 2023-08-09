@@ -1,0 +1,120 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-tasker-heading" data-cy="TaskerCreateUpdateHeading" jhiTranslate="biscApp.tasker.home.createOrEditLabel">
+        Criar ou editar Tasker
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.tasker.phoneNumber" for="field_phoneNumber">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+          <div *ngIf="editForm.get('phoneNumber')!.invalid && (editForm.get('phoneNumber')!.dirty || editForm.get('phoneNumber')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('phoneNumber')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 9 }"
+            >
+              Este campo deve ter pelo menos 9 caracteres.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('phoneNumber')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 13 }"
+            >
+              Este campo não pode ter mais que 13 caracteres.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.tasker.validation" for="field_validation">Validation</label>
+          <select class="form-control" name="validation" formControlName="validation" id="field_validation" data-cy="validation">
+            <option [ngValue]="null">{{ 'biscApp.TaskerValidation.null' | translate }}</option>
+            <option *ngFor="let taskerValidation of taskerValidationValues" [value]="taskerValidation">
+              {{ 'biscApp.TaskerValidation.' + taskerValidation | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.tasker.whenCreated" for="field_whenCreated">When Created</label>
+          <div class="d-flex">
+            <input
+              id="field_whenCreated"
+              data-cy="whenCreated"
+              type="datetime-local"
+              class="form-control"
+              name="whenCreated"
+              formControlName="whenCreated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('whenCreated')!.invalid && (editForm.get('whenCreated')!.dirty || editForm.get('whenCreated')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('whenCreated')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              O campo é obrigatório.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('whenCreated')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              Este campo é do tipo data/hora.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.tasker.portfolio" for="field_portfolio">Portfolio</label>
+          <select
+            class="form-control"
+            id="field_portfolio"
+            data-cy="portfolio"
+            name="portfolio"
+            formControlName="portfolio"
+            [compareWith]="comparePortfolio"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="portfolioOption" *ngFor="let portfolioOption of portfoliosCollection">{{ portfolioOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

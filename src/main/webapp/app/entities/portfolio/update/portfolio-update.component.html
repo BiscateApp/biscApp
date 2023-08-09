@@ -1,0 +1,221 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-portfolio-heading" data-cy="PortfolioCreateUpdateHeading" jhiTranslate="biscApp.portfolio.home.createOrEditLabel">
+        Criar ou editar Portfolio
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.portfolio.bio" for="field_bio">Bio</label>
+          <input type="text" class="form-control" name="bio" id="field_bio" data-cy="bio" formControlName="bio" />
+          <div *ngIf="editForm.get('bio')!.invalid && (editForm.get('bio')!.dirty || editForm.get('bio')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('bio')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 10 }"
+            >
+              Este campo deve ter pelo menos 10 caracteres.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('bio')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 5000 }"
+            >
+              Este campo não pode ter mais que 5000 caracteres.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.portfolio.skills" for="field_skills">Skills</label>
+          <input type="text" class="form-control" name="skills" id="field_skills" data-cy="skills" formControlName="skills" />
+          <div *ngIf="editForm.get('skills')!.invalid && (editForm.get('skills')!.dirty || editForm.get('skills')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('skills')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 10 }"
+            >
+              Este campo deve ter pelo menos 10 caracteres.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('skills')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              Este campo não pode ter mais que 100 caracteres.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.portfolio.speakingLanguages" for="field_speakingLanguages"
+            >Speaking Languages</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="speakingLanguages"
+            id="field_speakingLanguages"
+            data-cy="speakingLanguages"
+            formControlName="speakingLanguages"
+          />
+          <div
+            *ngIf="
+              editForm.get('speakingLanguages')!.invalid &&
+              (editForm.get('speakingLanguages')!.dirty || editForm.get('speakingLanguages')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('speakingLanguages')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              Este campo deve ter pelo menos 2 caracteres.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('speakingLanguages')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              Este campo não pode ter mais que 100 caracteres.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.portfolio.stars" for="field_stars">Stars</label>
+          <input type="number" class="form-control" name="stars" id="field_stars" data-cy="stars" formControlName="stars" />
+          <div *ngIf="editForm.get('stars')!.invalid && (editForm.get('stars')!.dirty || editForm.get('stars')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('stars')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              Este campo deve ser maior que 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('stars')?.errors?.max"
+              jhiTranslate="entity.validation.max"
+              [translateValues]="{ max: 1000 }"
+            >
+              Este campo não pode ser maior que 1000.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('stars')?.errors?.number" jhiTranslate="entity.validation.number">
+              Este campo é do tipo número.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.portfolio.completedTasks" for="field_completedTasks">Completed Tasks</label>
+          <input
+            type="number"
+            class="form-control"
+            name="completedTasks"
+            id="field_completedTasks"
+            data-cy="completedTasks"
+            formControlName="completedTasks"
+          />
+          <div
+            *ngIf="
+              editForm.get('completedTasks')!.invalid && (editForm.get('completedTasks')!.dirty || editForm.get('completedTasks')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('completedTasks')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              Este campo deve ser maior que 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('completedTasks')?.errors?.max"
+              jhiTranslate="entity.validation.max"
+              [translateValues]="{ max: 5000 }"
+            >
+              Este campo não pode ser maior que 5000.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('completedTasks')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              Este campo é do tipo número.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.portfolio.hourlyRate" for="field_hourlyRate">Hourly Rate</label>
+          <input
+            type="number"
+            class="form-control"
+            name="hourlyRate"
+            id="field_hourlyRate"
+            data-cy="hourlyRate"
+            formControlName="hourlyRate"
+          />
+          <div *ngIf="editForm.get('hourlyRate')!.invalid && (editForm.get('hourlyRate')!.dirty || editForm.get('hourlyRate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('hourlyRate')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              Este campo deve ser maior que 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('hourlyRate')?.errors?.max"
+              jhiTranslate="entity.validation.max"
+              [translateValues]="{ max: 1000 }"
+            >
+              Este campo não pode ser maior que 1000.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('hourlyRate')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              Este campo é do tipo número.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

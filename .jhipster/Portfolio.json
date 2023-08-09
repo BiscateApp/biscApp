@@ -1,0 +1,60 @@
+{
+  "applications": "*",
+  "changelogDate": "20230809200136",
+  "entityTableName": "portfolio",
+  "fields": [
+    {
+      "fieldName": "bio",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "5000",
+      "fieldValidateRulesMinlength": "10"
+    },
+    {
+      "fieldName": "skills",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "100",
+      "fieldValidateRulesMinlength": "10"
+    },
+    {
+      "fieldName": "speakingLanguages",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "100",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "stars",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1000",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "completedTasks",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "5000",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "hourlyRate",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1000",
+      "fieldValidateRulesMin": "0"
+    }
+  ],
+  "name": "Portfolio",
+  "relationships": [
+    {
+      "otherEntityName": "tasker",
+      "otherEntityRelationshipName": "portfolio",
+      "relationshipName": "tasker",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

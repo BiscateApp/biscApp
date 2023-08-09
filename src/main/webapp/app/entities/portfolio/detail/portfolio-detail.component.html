@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="portfolio">
+      <h2 data-cy="portfolioDetailsHeading"><span jhiTranslate="biscApp.portfolio.detail.title">Portfolio</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
+        <dd>
+          <span>{{ portfolio.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.portfolio.bio">Bio</span></dt>
+        <dd>
+          <span>{{ portfolio.bio }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.portfolio.skills">Skills</span></dt>
+        <dd>
+          <span>{{ portfolio.skills }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.portfolio.speakingLanguages">Speaking Languages</span></dt>
+        <dd>
+          <span>{{ portfolio.speakingLanguages }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.portfolio.stars">Stars</span></dt>
+        <dd>
+          <span>{{ portfolio.stars }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.portfolio.completedTasks">Completed Tasks</span></dt>
+        <dd>
+          <span>{{ portfolio.completedTasks }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.portfolio.hourlyRate">Hourly Rate</span></dt>
+        <dd>
+          <span>{{ portfolio.hourlyRate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+      </button>
+
+      <button type="button" [routerLink]="['/portfolio', portfolio.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>
