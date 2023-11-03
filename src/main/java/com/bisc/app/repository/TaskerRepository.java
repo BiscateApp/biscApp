@@ -14,8 +14,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TaskerRepository extends JpaRepository<Tasker, Long> {
-    @Query("select tasker from Tasker tasker where tasker.user.login = ?#{principal.username}")
-    List<Tasker> findByUserIsCurrentUser();
+    @Query("select tasker from Tasker tasker where tasker.user.login =:email")
+    Optional<Tasker> findByUserIsCurrentUser(@Param("email") String email);
 
     default Optional<Tasker> findOneWithEagerRelationships(Long id) {
         return this.findOneWithToOneRelationships(id);

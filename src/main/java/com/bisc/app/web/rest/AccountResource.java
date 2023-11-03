@@ -1,22 +1,34 @@
 package com.bisc.app.web.rest;
 
+import com.bisc.app.domain.Tasker;
 import com.bisc.app.domain.User;
+import com.bisc.app.domain.enumeration.TaskerType;
+import com.bisc.app.domain.enumeration.TaskerValidation;
+import com.bisc.app.repository.TaskerRepository;
 import com.bisc.app.repository.UserRepository;
 import com.bisc.app.security.SecurityUtils;
 import com.bisc.app.service.MailService;
 import com.bisc.app.service.UserService;
 import com.bisc.app.service.dto.AdminUserDTO;
 import com.bisc.app.service.dto.PasswordChangeDTO;
-import com.bisc.app.web.rest.errors.*;
+import com.bisc.app.web.rest.errors.EmailAlreadyUsedException;
+import com.bisc.app.web.rest.errors.InvalidPasswordException;
+import com.bisc.app.web.rest.errors.LoginAlreadyUsedException;
 import com.bisc.app.web.rest.vm.KeyAndPasswordVM;
 import com.bisc.app.web.rest.vm.ManagedUserVM;
 import jakarta.validation.Valid;
-import java.util.*;
+import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * REST controller for managing the current user's account.
@@ -36,12 +48,20 @@ public class AccountResource {
 
     private final UserRepository userRepository;
 
+    private final TaskerRepository taskerRepository;
+
     private final UserService userService;
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(
+        UserRepository userRepository,
+        TaskerRepository taskerRepository,
+        UserService userService,
+        MailService mailService
+    ) {
         this.userRepository = userRepository;
+        this.taskerRepository = taskerRepository;
         this.userService = userService;
         this.mailService = mailService;
     }
@@ -61,6 +81,8 @@ public class AccountResource {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        Tasker tasker = new Tasker().validation(TaskerValidation.COMPLETED).taskerType(TaskerType.TASKPOSTER).user(user);
+        taskerRepository.save(tasker);
         mailService.sendActivationEmail(user);
     }
 

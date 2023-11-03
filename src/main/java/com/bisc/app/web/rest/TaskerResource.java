@@ -201,4 +201,17 @@ public class TaskerResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code GET  /taskers/email/:email} : get tasker by "email".
+     *
+     * @param email the email of the tasker to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the tasker, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/taskers/email/{email}")
+    public ResponseEntity<Tasker> getTasker(@PathVariable String email) {
+        log.debug("REST request to get Tasker by email : {}", email);
+        Optional<Tasker> tasker = taskerRepository.findByUserIsCurrentUser(email);
+        return ResponseUtil.wrapOrNotFound(tasker);
+    }
 }

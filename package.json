@@ -2,7 +2,7 @@
   "name": "bisc-app",
   "version": "0.0.1-SNAPSHOT",
   "private": true,
-  "description": "Description for Bisc App",
+  "description": "Description for BiscApp",
   "license": "UNLICENSED",
   "scripts": {
     "app:start": "./mvnw",
