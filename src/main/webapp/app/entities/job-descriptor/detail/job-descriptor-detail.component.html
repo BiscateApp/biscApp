@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="jobDescriptor">
+      <h2 data-cy="jobDescriptorDetailsHeading"><span jhiTranslate="biscApp.jobDescriptor.detail.title">Job Descriptor</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
+        <dd>
+          <span>{{ jobDescriptor.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.jobDescriptor.name">Name</span></dt>
+        <dd>
+          <span>{{ jobDescriptor.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.jobDescriptor.description">Description</span></dt>
+        <dd>
+          <span>{{ jobDescriptor.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.jobDescriptor.portfolio">Portfolio</span></dt>
+        <dd>
+          <div *ngIf="jobDescriptor.portfolio">
+            <a [routerLink]="['/portfolio', jobDescriptor.portfolio.id, 'view']">{{ jobDescriptor.portfolio.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+      </button>
+
+      <button type="button" [routerLink]="['/job-descriptor', jobDescriptor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

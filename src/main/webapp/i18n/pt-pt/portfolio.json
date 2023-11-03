@@ -1,0 +1,31 @@
+{
+  "biscApp": {
+    "portfolio": {
+      "home": {
+        "title": "Portfolios",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Criar novo(a) Portfolio",
+        "createOrEditLabel": "Criar ou editar Portfolio",
+        "notFound": "Nenhum Portfolios encontrado"
+      },
+      "created": "Um novo Portfolio foi criado com o identificador {{ param }}",
+      "updated": "Portfolio com identificador {{ param }} foi actualizado",
+      "deleted": "Portfolio com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Portfolio {{ id }}?"
+      },
+      "detail": {
+        "title": "Portfolio"
+      },
+      "id": "ID",
+      "bio": "Bio",
+      "skills": "Skills",
+      "speakingLanguages": "Speaking Languages",
+      "stars": "Stars",
+      "completedTasks": "Completed Tasks",
+      "hourlyRate": "Hourly Rate",
+      "tasker": "Tasker",
+      "jobDescriptor": "Job Descriptor"
+    }
+  }
+}

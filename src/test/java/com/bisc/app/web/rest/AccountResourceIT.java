@@ -9,6 +9,7 @@ import com.bisc.app.IntegrationTest;
 import com.bisc.app.config.Constants;
 import com.bisc.app.domain.User;
 import com.bisc.app.repository.AuthorityRepository;
+import com.bisc.app.repository.TaskerRepository;
 import com.bisc.app.repository.UserRepository;
 import com.bisc.app.security.AuthoritiesConstants;
 import com.bisc.app.service.UserService;
@@ -40,6 +41,9 @@ class AccountResourceIT {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TaskerRepository taskerRepository;
 
     @Autowired
     private AuthorityRepository authorityRepository;

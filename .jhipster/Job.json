@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20231103125400",
+  "entityTableName": "job",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "500",
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "JobStatus",
+      "fieldValues": "QUERY,BUDGET,ONGOING,COMPLETED"
+    },
+    {
+      "fieldName": "whenCreated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "whenUpdated",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Job",
+  "relationships": [
+    {
+      "otherEntityName": "address",
+      "relationshipName": "location",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "jobDescriptor",
+      "relationshipName": "descriptor",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "tasker",
+      "relationshipName": "jobDoer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

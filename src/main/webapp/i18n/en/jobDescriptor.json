@@ -1,0 +1,27 @@
+{
+  "biscApp": {
+    "jobDescriptor": {
+      "home": {
+        "title": "Job Descriptors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Job Descriptor",
+        "createOrEditLabel": "Create or edit a Job Descriptor",
+        "notFound": "No Job Descriptors found"
+      },
+      "created": "A new Job Descriptor is created with identifier {{ param }}",
+      "updated": "A Job Descriptor is updated with identifier {{ param }}",
+      "deleted": "A Job Descriptor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Job Descriptor {{ id }}?"
+      },
+      "detail": {
+        "title": "Job Descriptor"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "portfolio": "Portfolio",
+      "job": "Job"
+    }
+  }
+}

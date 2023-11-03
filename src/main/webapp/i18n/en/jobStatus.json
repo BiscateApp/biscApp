@@ -1,0 +1,11 @@
+{
+  "biscApp": {
+    "JobStatus": {
+      "null": "",
+      "QUERY": "QUERY",
+      "BUDGET": "BUDGET",
+      "ONGOING": "ONGOING",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}
