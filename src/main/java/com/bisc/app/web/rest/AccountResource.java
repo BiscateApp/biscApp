@@ -1,10 +1,6 @@
 package com.bisc.app.web.rest;
 
-import com.bisc.app.domain.Tasker;
 import com.bisc.app.domain.User;
-import com.bisc.app.domain.enumeration.TaskerType;
-import com.bisc.app.domain.enumeration.TaskerValidation;
-import com.bisc.app.repository.TaskerRepository;
 import com.bisc.app.repository.UserRepository;
 import com.bisc.app.security.SecurityUtils;
 import com.bisc.app.service.MailService;
@@ -48,20 +44,12 @@ public class AccountResource {
 
     private final UserRepository userRepository;
 
-    private final TaskerRepository taskerRepository;
-
     private final UserService userService;
 
     private final MailService mailService;
 
-    public AccountResource(
-        UserRepository userRepository,
-        TaskerRepository taskerRepository,
-        UserService userService,
-        MailService mailService
-    ) {
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
         this.userRepository = userRepository;
-        this.taskerRepository = taskerRepository;
         this.userService = userService;
         this.mailService = mailService;
     }
@@ -81,8 +69,6 @@ public class AccountResource {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        Tasker tasker = new Tasker().validation(TaskerValidation.COMPLETED).taskerType(TaskerType.TASKPOSTER).user(user);
-        taskerRepository.save(tasker);
         mailService.sendActivationEmail(user);
     }
 

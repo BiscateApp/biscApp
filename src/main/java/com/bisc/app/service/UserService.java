@@ -2,8 +2,12 @@ package com.bisc.app.service;
 
 import com.bisc.app.config.Constants;
 import com.bisc.app.domain.Authority;
+import com.bisc.app.domain.Tasker;
 import com.bisc.app.domain.User;
+import com.bisc.app.domain.enumeration.TaskerType;
+import com.bisc.app.domain.enumeration.TaskerValidation;
 import com.bisc.app.repository.AuthorityRepository;
+import com.bisc.app.repository.TaskerRepository;
 import com.bisc.app.repository.UserRepository;
 import com.bisc.app.security.AuthoritiesConstants;
 import com.bisc.app.security.SecurityUtils;
@@ -35,6 +39,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final TaskerRepository taskerRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
@@ -43,11 +49,13 @@ public class UserService {
 
     public UserService(
         UserRepository userRepository,
+        TaskerRepository taskerRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
         CacheManager cacheManager
     ) {
         this.userRepository = userRepository;
+        this.taskerRepository = taskerRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
@@ -132,6 +140,8 @@ public class UserService {
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+        Tasker tasker = new Tasker().validation(TaskerValidation.COMPLETED).taskerType(TaskerType.TASKPOSTER).user(newUser);
+        taskerRepository.save(tasker);
         return newUser;
     }
 
@@ -139,6 +149,8 @@ public class UserService {
         if (existingUser.isActivated()) {
             return false;
         }
+        taskerRepository.findByUserIsCurrentUser(existingUser.getLogin()).ifPresent(taskerRepository::delete);
+        taskerRepository.flush();
         userRepository.delete(existingUser);
         userRepository.flush();
         this.clearUserCaches(existingUser);
