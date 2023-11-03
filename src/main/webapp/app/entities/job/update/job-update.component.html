@@ -1,0 +1,164 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-job-heading" data-cy="JobCreateUpdateHeading" jhiTranslate="biscApp.job.home.createOrEditLabel">Criar ou editar Job</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.job.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 3 }"
+            >
+              Este campo deve ter pelo menos 3 caracteres.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              Este campo não pode ter mais que 500 caracteres.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.job.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.job.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'biscApp.JobStatus.null' | translate }}</option>
+            <option *ngFor="let jobStatus of jobStatusValues" [value]="jobStatus">
+              {{ 'biscApp.JobStatus.' + jobStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.job.whenCreated" for="field_whenCreated">When Created</label>
+          <div class="d-flex">
+            <input
+              id="field_whenCreated"
+              data-cy="whenCreated"
+              type="datetime-local"
+              class="form-control"
+              name="whenCreated"
+              formControlName="whenCreated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.job.whenUpdated" for="field_whenUpdated">When Updated</label>
+          <div class="d-flex">
+            <input
+              id="field_whenUpdated"
+              data-cy="whenUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="whenUpdated"
+              formControlName="whenUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.job.location" for="field_location">Location</label>
+          <select
+            class="form-control"
+            id="field_location"
+            data-cy="location"
+            name="location"
+            formControlName="location"
+            [compareWith]="compareAddress"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="addressOption" *ngFor="let addressOption of locationsCollection">{{ addressOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.job.descriptor" for="field_descriptor">Descriptor</label>
+          <select
+            class="form-control"
+            id="field_descriptor"
+            data-cy="descriptor"
+            name="descriptor"
+            formControlName="descriptor"
+            [compareWith]="compareJobDescriptor"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="jobDescriptorOption" *ngFor="let jobDescriptorOption of descriptorsCollection">
+              {{ jobDescriptorOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="biscApp.job.jobDoer" for="field_jobDoer">Job Doer</label>
+          <select
+            class="form-control"
+            id="field_jobDoer"
+            data-cy="jobDoer"
+            name="jobDoer"
+            formControlName="jobDoer"
+            [compareWith]="compareTasker"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="taskerOption" *ngFor="let taskerOption of taskersSharedCollection">{{ taskerOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="job">
+      <h2 data-cy="jobDetailsHeading"><span jhiTranslate="biscApp.job.detail.title">Job</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
+        <dd>
+          <span>{{ job.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.job.description">Description</span></dt>
+        <dd>
+          <span>{{ job.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.job.date">Date</span></dt>
+        <dd>
+          <span>{{ job.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.job.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'biscApp.JobStatus.' + job.status }}">{{ job.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.job.whenCreated">When Created</span></dt>
+        <dd>
+          <span>{{ job.whenCreated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.job.whenUpdated">When Updated</span></dt>
+        <dd>
+          <span>{{ job.whenUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="biscApp.job.location">Location</span></dt>
+        <dd>
+          <div *ngIf="job.location">
+            <a [routerLink]="['/address', job.location.id, 'view']">{{ job.location.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="biscApp.job.descriptor">Descriptor</span></dt>
+        <dd>
+          <div *ngIf="job.descriptor">
+            <a [routerLink]="['/job-descriptor', job.descriptor.id, 'view']">{{ job.descriptor.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="biscApp.job.jobDoer">Job Doer</span></dt>
+        <dd>
+          <div *ngIf="job.jobDoer">
+            <a [routerLink]="['/tasker', job.jobDoer.id, 'view']">{{ job.jobDoer.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+      </button>
+
+      <button type="button" [routerLink]="['/job', job.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

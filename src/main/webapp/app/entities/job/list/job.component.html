@@ -1,0 +1,139 @@
+<div>
+  <h2 id="page-heading" data-cy="JobHeading">
+    <span jhiTranslate="biscApp.job.home.title">Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="biscApp.job.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-job"
+        [routerLink]="['/job/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="biscApp.job.home.createLabel"> Criar novo(a) Job </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="jobs?.length === 0">
+    <span jhiTranslate="biscApp.job.home.notFound">Nenhum Jobs encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="jobs && jobs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.job.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.job.date">Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.job.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="whenCreated">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.job.whenCreated">When Created</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="whenUpdated">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.job.whenUpdated">When Updated</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="location.id">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.job.location">Location</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="descriptor.id">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.job.descriptor">Descriptor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="jobDoer.id">
+            <div class="d-flex">
+              <span jhiTranslate="biscApp.job.jobDoer">Job Doer</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/job', job.id, 'view']">{{ job.id }}</a>
+          </td>
+          <td>{{ job.description }}</td>
+          <td>{{ job.date | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'biscApp.JobStatus.' + job.status }}">{{ job.status }}</td>
+          <td>{{ job.whenCreated | formatMediumDatetime }}</td>
+          <td>{{ job.whenUpdated | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="job.location">
+              <a [routerLink]="['/address', job.location.id, 'view']">{{ job.location.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="job.descriptor">
+              <a [routerLink]="['/job-descriptor', job.descriptor.id, 'view']">{{ job.descriptor.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="job.jobDoer">
+              <a [routerLink]="['/tasker', job.jobDoer.id, 'view']">{{ job.jobDoer.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/job', job.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/job', job.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(job)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

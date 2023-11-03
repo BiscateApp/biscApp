@@ -1,0 +1,9 @@
+{
+  "biscApp": {
+    "TaskerType": {
+      "null": "",
+      "TASKDOER": "TASKDOER",
+      "TASKPOSTER": "TASKPOSTER"
+    }
+  }
+}

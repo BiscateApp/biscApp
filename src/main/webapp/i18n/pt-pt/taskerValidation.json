@@ -1,0 +1,11 @@
+{
+  "biscApp": {
+    "TaskerValidation": {
+      "null": "",
+      "PENDING": "PENDING",
+      "ONGOING": "ONGOING",
+      "COMPLETED": "COMPLETED",
+      "FAILED": "FAILED"
+    }
+  }
+}

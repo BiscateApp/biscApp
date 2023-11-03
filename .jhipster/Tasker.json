@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "changelogDate": "20231103125358",
+  "entityTableName": "tasker",
+  "fields": [
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "13",
+      "fieldValidateRulesMinlength": "9"
+    },
+    {
+      "fieldName": "validation",
+      "fieldType": "TaskerValidation",
+      "fieldValues": "PENDING,ONGOING,COMPLETED,FAILED"
+    },
+    {
+      "fieldName": "taskerType",
+      "fieldType": "TaskerType",
+      "fieldValues": "TASKDOER,TASKPOSTER"
+    }
+  ],
+  "name": "Tasker",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "portfolio",
+      "otherEntityRelationshipName": "tasker",
+      "relationshipName": "portfolio",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "address",
+      "otherEntityRelationshipName": "tasker",
+      "relationshipName": "address",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
+  "searchEngine": "no"
+}

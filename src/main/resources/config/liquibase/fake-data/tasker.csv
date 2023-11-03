@@ -1,0 +1,11 @@
+id;phone_number;validation;tasker_type
+1;Suave Nordest;PENDING;TASKPOSTER
+2;Chapéu Catar ;PENDING;TASKPOSTER
+3;Niue Norte No;FAILED;TASKDOER
+4;NoroesteX;COMPLETED;TASKDOER
+5;Rato amarelo;PENDING;TASKPOSTER
+6;Nordeste Nort;COMPLETED;TASKDOER
+7;Peixe Mercear;COMPLETED;TASKPOSTER
+8;SodoesteX;PENDING;TASKPOSTER
+9;Congelado Isa;COMPLETED;TASKDOER
+10;Sodoeste Meta;PENDING;TASKDOER
