@@ -1,8 +1,16 @@
 package com.bisc.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -24,19 +32,19 @@ public class Address implements Serializable {
     private Long id;
 
     @Size(min = 3, max = 20)
-    @Column(name = "country", length = 20)
+    @Column(name = "country", length = 20, nullable = false)
     private String country;
 
     @Size(min = 3, max = 20)
-    @Column(name = "city", length = 20)
+    @Column(name = "city", length = 20, nullable = false)
     private String city;
 
     @Size(min = 4, max = 20)
-    @Column(name = "postal_code", length = 20)
+    @Column(name = "postal_code", length = 20, nullable = false)
     private String postalCode;
 
     @Size(min = 3, max = 100)
-    @Column(name = "street_address", length = 100)
+    @Column(name = "street_address", length = 100, nullable = false)
     private String streetAddress;
 
     @Size(min = 9, max = 9)
@@ -46,13 +54,15 @@ public class Address implements Serializable {
     @Column(name = "is_default")
     private Boolean isDefault;
 
-    @JsonIgnoreProperties(value = { "portfolio", "address", "user" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
+    //@JsonIgnoreProperties(value = { "portfolio", "address", "user" }, allowSetters = true)
+    @JoinColumn(unique = true)
+    @JsonIgnoreProperties(value = { "taskerType", "portfolio", "user", "address", "phoneNumber", "validation" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY)
     private Tasker tasker;
 
-    @JsonIgnoreProperties(value = { "location", "descriptor", "jobDoer" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "location")
-    private Job job;
+    //    @JsonIgnoreProperties(value = { "location", "descriptor", "jobDoer" }, allowSetters = true)
+    //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "location")
+    //    private Job job;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -163,25 +173,6 @@ public class Address implements Serializable {
 
     public Address tasker(Tasker tasker) {
         this.setTasker(tasker);
-        return this;
-    }
-
-    public Job getJob() {
-        return this.job;
-    }
-
-    public void setJob(Job job) {
-        if (this.job != null) {
-            this.job.setLocation(null);
-        }
-        if (job != null) {
-            job.setLocation(this);
-        }
-        this.job = job;
-    }
-
-    public Address job(Job job) {
-        this.setJob(job);
         return this;
     }
 

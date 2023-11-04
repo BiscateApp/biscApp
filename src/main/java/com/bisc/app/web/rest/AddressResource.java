@@ -1,7 +1,9 @@
 package com.bisc.app.web.rest;
 
 import com.bisc.app.domain.Address;
+import com.bisc.app.domain.Tasker;
 import com.bisc.app.repository.AddressRepository;
+import com.bisc.app.security.SecurityUtils;
 import com.bisc.app.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -15,8 +17,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -54,6 +66,10 @@ public class AddressResource {
         if (address.getId() != null) {
             throw new BadRequestAlertException("A new address cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        Long taskerId = SecurityUtils
+            .getTaskerClaim()
+            .orElseThrow(() -> new SessionAuthenticationException("Admin users can't create addresses!"));
+        address.setTasker(new Tasker().id(taskerId));
         Address result = addressRepository.save(address);
         return ResponseEntity
             .created(new URI("/api/addresses/" + result.getId()))
@@ -168,14 +184,6 @@ public class AddressResource {
             return StreamSupport
                 .stream(addressRepository.findAll().spliterator(), false)
                 .filter(address -> address.getTasker() == null)
-                .toList();
-        }
-
-        if ("job-is-null".equals(filter)) {
-            log.debug("REST request to get all Addresss where job is null");
-            return StreamSupport
-                .stream(addressRepository.findAll().spliterator(), false)
-                .filter(address -> address.getJob() == null)
                 .toList();
         }
         log.debug("REST request to get all Addresses");

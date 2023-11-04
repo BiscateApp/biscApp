@@ -2,13 +2,17 @@ package com.bisc.app.web.rest;
 
 import static com.bisc.app.security.SecurityUtils.AUTHORITIES_KEY;
 import static com.bisc.app.security.SecurityUtils.JWT_ALGORITHM;
+import static com.bisc.app.security.SecurityUtils.TASKER_CLAIM;
 
+import com.bisc.app.domain.Tasker;
+import com.bisc.app.repository.TaskerRepository;
 import com.bisc.app.web.rest.vm.LoginVM;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,9 +50,16 @@ public class AuthenticateController {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public AuthenticateController(JwtEncoder jwtEncoder, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    private final TaskerRepository taskerRepository;
+
+    public AuthenticateController(
+        JwtEncoder jwtEncoder,
+        AuthenticationManagerBuilder authenticationManagerBuilder,
+        TaskerRepository taskerRepository
+    ) {
         this.jwtEncoder = jwtEncoder;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.taskerRepository = taskerRepository;
     }
 
     @PostMapping("/authenticate")
@@ -94,7 +105,9 @@ public class AuthenticateController {
             .issuedAt(now)
             .expiresAt(validity)
             .subject(authentication.getName())
-            .claim(AUTHORITIES_KEY, authorities)
+            .claims(customClain -> customClain.putAll(taskerRepository.findByUserIsCurrentUser(authentication.getName()).map(Tasker::getId)
+                .map(a -> Map.of(AUTHORITIES_KEY, authorities, TASKER_CLAIM, a))
+                .orElseGet(() -> Map.of(AUTHORITIES_KEY, authorities))))
             .build();
 
         JwsHeader jwsHeader = JwsHeader.with(JWT_ALGORITHM).build();

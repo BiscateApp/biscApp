@@ -26,6 +26,10 @@
     <include file="config/liquibase/changelog/20231103125357_added_entity_constraints_JobDescriptor.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231103125358_added_entity_constraints_Tasker.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231103125400_added_entity_constraints_Job.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231104121046_changelog.xml" relativeToChangelogFile="false"/><!--    <include file="config/liquibase/changelog/20231104124942_changelog.xml" relativeToChangelogFile="false"/>-->
+    <include file="config/liquibase/changelog/20231104160910_changelog.xml" relativeToChangelogFile="false"/>
+
+
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

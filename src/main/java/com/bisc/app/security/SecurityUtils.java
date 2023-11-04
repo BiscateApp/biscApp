@@ -20,6 +20,8 @@ public final class SecurityUtils {
 
     public static final String AUTHORITIES_KEY = "auth";
 
+    public static final String TASKER_CLAIM = "tid";
+
     private SecurityUtils() {}
 
     /**
@@ -30,6 +32,25 @@ public final class SecurityUtils {
     public static Optional<String> getCurrentUserLogin() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         return Optional.ofNullable(extractPrincipal(securityContext.getAuthentication()));
+    }
+
+    /**
+     * Get the login of the current user.
+     *
+     * @return the login of the current user.
+     */
+    public static Optional<Long> getTaskerClaim() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        return extractPrincipalIdClaim(securityContext.getAuthentication());
+    }
+
+    private static Optional<Long> extractPrincipalIdClaim(Authentication authentication) {
+        if (authentication == null) {
+            return Optional.empty();
+        } else if (authentication.getPrincipal() instanceof Jwt jwt) {
+            return Optional.ofNullable((Long) jwt.getClaims().get(TASKER_CLAIM));
+        }
+        return Optional.empty();
     }
 
     private static String extractPrincipal(Authentication authentication) {

@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="snackk (generated)" id="1699099865001-6">
+        <modifyDataType columnName="city" newDataType="varchar(20)" tableName="address"/>
+    </changeSet>
+    <changeSet author="snackk (generated)" id="1699099865001-7">
+        <addNotNullConstraint columnDataType="varchar(20)" columnName="city" tableName="address" validate="true"/>
+    </changeSet>
+    <changeSet author="snackk (generated)" id="1699099865001-9">
+        <modifyDataType columnName="country" newDataType="varchar(20)" tableName="address"/>
+    </changeSet>
+    <changeSet author="snackk (generated)" id="1699099865001-10">
+        <addNotNullConstraint columnDataType="varchar(20)" columnName="country" tableName="address" validate="true"/>
+    </changeSet>
+    <changeSet author="snackk (generated)" id="1699099865001-41">
+        <modifyDataType columnName="postal_code" newDataType="varchar(20)" tableName="address"/>
+    </changeSet>
+    <changeSet author="snackk (generated)" id="1699099865001-42">
+        <addNotNullConstraint columnDataType="varchar(20)" columnName="postal_code" tableName="address" validate="true"/>
+    </changeSet>
+    <changeSet author="snackk (generated)" id="1699099865001-49">
+        <modifyDataType columnName="street_address" newDataType="varchar(100)" tableName="address"/>
+    </changeSet>
+    <changeSet author="snackk (generated)" id="1699099865001-50">
+        <addNotNullConstraint columnDataType="varchar(100)" columnName="street_address" tableName="address" validate="true"/>
+    </changeSet>
+    <changeSet author="snackk (generated)" id="1699099865001-51">
+        <addNotNullConstraint columnDataType="boolean" columnName="is_default" tableName="address" validate="true" defaultNullValue="1"/>
+    </changeSet>
+</databaseChangeLog>
